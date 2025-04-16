@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoBay Blog - Hub of Expression</title>
     <link rel="stylesheet" href="codb.css">
-    <script src="codb.js" defer></script>
 </head>
 
 <body>
@@ -17,7 +16,6 @@
                 <li class="link"><a href="#updates">What's New?</a></li>
                 <li class="link"><a href="#entertainment">Entertainment</a></li>
                 <li class="link"><a href="#course">Courses</a></li>
-                <li class="link"><a href="#form">&CirclePlus; Write An Article</a></li>
                 <li class="link"><a href="#aboutus">About CoBay!</a></li>
             </ul>
 
@@ -30,7 +28,6 @@
                     <li class="link"><a href="#updates">What's New?</a></li>
                     <li class="link"><a href="#entertainment">Entertainment</a></li>
                     <li class="link"><a href="#course">Courses</a></li>
-                    <li class="link"><a href="#form"> &CirclePlus; Write An Article</a></li>
                     <li class="link"><a href="#aboutus">About CoBay!</a></li>
                 </ul>
             </div>
@@ -38,6 +35,7 @@
     </header>
 
     <main id="#">
+        <div> <button id="write" type="submit" class="btn"> Write An Article </button></div>
 
         <section class="section-container" id="updates">
             <h2 id="head-text">What's New?</h2>
@@ -186,10 +184,11 @@
             </div>
         </section>
 
-        <article id="view">
+        <article id="view" class="hidden view">
+            <button id="back">Go Back</button>
         </article>
 
-        <form action="submit" class="new-article" id="form">
+        <form action="submit" class="new-article hidden" id="form">
             <label for="title">Title</label>
             <input type="text" required name="title" id="title" placeholder="e.g. New Methods In Javascript">
             <input type="text" name="tags" id="tag" placeholder="e.g  #update">
@@ -202,17 +201,22 @@
                 <option value="course">Course</option>
             </select>
             <label for="article-image">Add image for content</label>
-            <input type="file" id="article-image">
+            <input type="file" id="article-image" accept=".jpg">
             <label for="article-txt">Contents</label>
-            <textarea name="article-txt" required id="article-txt" cols="40" rows="25"></textarea>
-            <buttton id="add">Upload article</buttton>
+            <textarea name="article-txt" required id="article-txt" cols="20" rows="20"></textarea>
+            <div class="upload">
+                <buttton id="add" class="btn">Upload article</buttton>
+            </div>
         </form>
+       
     </main>
     <footer>
         <a href="#">Back to Top</a>
         <p>&copy; CoBay! 2025</p>
     </footer>
 
+    <script src="codb.js"></script>
 </body>
 
 </html>
+
