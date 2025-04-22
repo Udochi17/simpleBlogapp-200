@@ -35,15 +35,15 @@
     </header>
 
     <main id="#">
-        <div> <button id="write" type="submit" class="btn"> Write An Article </button></div>
+        <div class="write-btn"> <button id="write" type="submit" class="btn"> Write An Article </button></div>
 
-        <section class="section-container" id="updates">
+        <section class="section-container">
             <h2 id="head-text">What's New?</h2>
             <hr>
-            <div class="articles">
+            <div class="articles" id="updates">
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Software is the New things</h2>
+                        <h2 id="title-txt">Software is the New things</h2>
                         <p class="tags">#trending #challenge</p>
                     </div>
                     <div class="topic-content">
@@ -64,7 +64,7 @@
 
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Software is the New things</h2>
+                        <h2 id="title-txt">Software is the New things</h2>
                         <p class="tags">#trending #challenge</p>
                     </div>
                     <div class="topic-content">
@@ -83,16 +83,17 @@
 
                     <button class="read btn" onclick="readArticle(this)">Read article</button>
                 </div>
+            </div>
         </section>
 
-        <section class="section-container" id="comedy">
+        <section class="section-container">
             <h2 id="head-text">Entertainment</h2>
             <hr>
-            <div class="articles">
+            <div class="articles" id="entertainment">
 
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Man who wore Softwares..</h2>
+                        <h2 id="title-txt">Man who wore Softwares..</h2>
                         <p class="tags">
                             #comedy #challenge</p>
                     </div>
@@ -115,7 +116,7 @@
 
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Man who wore Softwares..</h2>
+                        <h2 id="title-txt">Man who wore Softwares..</h2>
                         <p class="tags">
                             #comedy #challenge</p>
                     </div>
@@ -137,13 +138,13 @@
             </div>
         </section>
 
-        <section class="section-container" id="course">
+        <section class="section-container">
             <h2 id="head-text">Tech Courses</h2>
             <hr>
-            <div class="articles">
+            <div class="articles" id="course">
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Data Analysis courses</h2>
+                        <h2 id="title-txt">Data Analysis courses</h2>
                         <p class="tags">#courses #challenge</p>
                     </div>
                     <div class="topic-content">
@@ -163,7 +164,7 @@
                 </div>
                 <div class="topic-card">
                     <div class="topic-head">
-                        <h2 id="title">Data Analysis courses</h2>
+                        <h2 id="title-txt">Data Analysis courses</h2>
                         <p class="tags">#courses #challenge</p>
                     </div>
                     <div class="topic-content">
@@ -184,13 +185,59 @@
             </div>
         </section>
 
+        <section class="section-container">
+            <h2 id="head-text">Comedy</h2>
+            <hr>
+            <div class="articles" id="comedy">
+                <div class="topic-card">
+                    <div class="topic-head">
+                        <h2 id="title-txt">Laugh Out Loudest</h2>
+                        <p class="tags">#funny #challenge</p>
+                    </div>
+                    <div class="topic-content">
+                        <div class="topic-text">
+                            <p>With increasing rate of technological advancements.. tech is sure going to be in every
+                                human mind in the coming age.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus,
+                                eius
+                                placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque
+                                cum
+                                libero earum, vero repellat tempora similique.</p>
+                        </div>
+                        <div class="topic-image"><img src="img/9910414.jpg" alt="courses image"></div>
+                    </div>
+                    <button class="read btn" onclick="readArticle(this)">Read article</button>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-head">
+                        <h2 id="title-txt">Laugh Out Loudest</h2>
+                        <p class="tags">#funny #challenge</p>
+                    </div>
+                    <div class="topic-content">
+                        <div class="topic-text">
+                            <p>With increasing rate of technological advancements.. tech is sure going to be in every
+                                human mind in the coming age.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus,
+                                eius
+                                placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque
+                                cum
+                                libero earum, vero repellat tempora similique.</p>
+                        </div>
+                        <div class="topic-image"><img src="img/9910414.jpg" alt="courses image"></div>
+                    </div>
+                    <button class="read btn" onclick="readArticle(this)">Read article</button>
+                </div>
+            </div>
+        </section>
+
         <article id="view" class="hidden view">
-            <button id="back">Go Back</button>
+            <button id="back" type='button' class="btn">Go Back</button>
         </article>
 
         <form action="submit" class="new-article hidden" id="form">
             <label for="title">Title</label>
-            <input type="text" required name="title" id="title" placeholder="e.g. New Methods In Javascript">
+            <input type="text" required name="title" id="title-input" placeholder="e.g. New Methods In Javascript">
             <input type="text" name="tags" id="tag" placeholder="e.g  #update">
             <label for="category">Category</label>
             <select name="category" required id="category">
@@ -200,15 +247,14 @@
                 <option value="comedy">Comedy</option>
                 <option value="course">Course</option>
             </select>
-            <label for="article-image">Add image for content</label>
-            <input type="file" id="article-image" accept=".jpg">
             <label for="article-txt">Contents</label>
             <textarea name="article-txt" required id="article-txt" cols="20" rows="20"></textarea>
             <div class="upload">
                 <buttton id="add" class="btn">Upload article</buttton>
+                <button id="cancel" class="btn">Back</button>
             </div>
         </form>
-       
+
     </main>
     <footer>
         <a href="#">Back to Top</a>
@@ -219,4 +265,3 @@
 </body>
 
 </html>
-
