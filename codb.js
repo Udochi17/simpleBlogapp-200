@@ -4,70 +4,115 @@ const sectEntertainment = document.getElementById('entertainment');
 const sectCourse = document.getElementById('course');
 const sectComedy = document.getElementById('comedy');
 const uploadBtn = document.getElementById('add');
-const titleInput = document.getElementById('title');
+const titleInput = document.getElementById('title-input');
 const tagInput = document.getElementById('tag');
 const categoryInput = document.getElementsByTagName('option');
 const fileInput = document.getElementById('article-image');
 const textInput = document.getElementById('article-txt');
 const viewPage = document.getElementById('view');
-const sectionContainer = document.querySelectorAll('.section-container')
+const sectionContainer = document.querySelectorAll('.section-container');
+const writeArticle = document.getElementById('write');
 
-const contents = JSON.parse(localStorage.getItem(article)) || [];
+const contents = JSON.parse(localStorage.getItem('article')) || [];
 let optionSelect = 'selected';
-let section;
+let chooseSect;
 let article = {};
+let articleArr = [];
+const imageArr = [
+    'img/9910414.jpg',
+    'img/twitwall.jpg',
+    'img/Screenshot (261).png'
+];
 
-const upload = () => {
-    const topicCard = document.createElement('div');
+/* Store content objects locally when document is loaded */
+document.addEventListener('DOMContentLoaded', () => {
+    const arr = [
+        {
+            id: `Software is the New thing1${Date.now()}2`,
+            title: 'Software is the New thing',
+            tag: '#trending #challenge',
+            chooseSect: 'update',
+            text: `With increasing rate of technological advancements.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.With increasing rate of technological advancements.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.`
+        },
+
+        {
+            id: `Man who wore Softwares..1${Date.now()}2`,
+            title: 'Man who wore Softwares..',
+            tag: '#comedy #challenge',
+            chooseSect: 'comedy',
+            text: `I met a man so soft that he only wore software.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique. bus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.With increasing rate of technological advancements.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.`
+        },
+
+        {
+            id: `Data Analysis courses1${Date.now()}2`,
+            title: 'Data Analysis courses',
+            tag: '#courses #challenge',
+            chooseSect: 'course',
+            text: `There are courses made available by different organisations that can help you learn and develop. um dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique. bus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.With increasing rate of technological advancements.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique`
+        },
+
+        {
+            id: `Screaming Entertainment!1${Date.now()}2`,
+            title: 'Screaming Entertainment!',
+            tag: '#fun #entertainment',
+            chooseSect: 'entertainment',
+            text: `Writing code is a lot fun, especially when you make use of the right tools. um dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique. bus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique.With increasing rate of technological advancements.. tech is sure going to be in every human mind in the coming age. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat necessitatibus, eius placeat repudiandae odio in minima voluptates voluptatibus laborum at consequatur cumque cum libero earum, vero repellat tempora similique`
+        }
+    ];
+
+    localStorage.setItem(`article`, JSON.stringify(arr));
+});
+
+/* Function to push article or new posts to the main page*/
+const pushArticle = () => {
     contents.forEach(article => {
+        const topicCard = document.createElement('div');
         topicCard.id = article.id;
+        const imageNo = Math.round(Math.random() * 3);
         topicCard.classList.add('topic-card');
         topicCard.innerHTML = ` 
                     <div class="topic-head">
-                        <h2 id="title">${article.title}</h2>
+                        <h2 id="title-txt">${article.title}</h2>
                         <p class="tags">${article.tag}</p>
                     </div>
                     <div class="topic-content">
                         <div class="topic-text">
                             <p>${article.text}</p>
                         </div>
-                        <div class="topic-image"><img class='img-div' src=${article.imageFile}></div>
+                     <div class="topic-image"><img class='img-div' src='${imageArr[imageNo]}'></div>
                     </div>
                     
-                    <button class="read-btn" onclick="readArticle(this)">Read article</button>`;
+                    <button class="read btn" onclick="readArticle(this)">Read article</button>`;
 
-        switch (article.option) {
-            case 'entertainment': sectEntertainment.appendChild(topicCard)
+    /* append topicCard element based on the selected section*/
+        switch (article.chooseSect) {
+            case 'entertainment': sectEntertainment.appendChild(topicCard);
                 break;
-            case 'update': sectUpdate.appendChild(topicCard)
+            case 'update': sectUpdate.appendChild(topicCard);
                 break;
-            case 'comedy': sectComedy.appendChild(topicCard)
+            case 'comedy': sectComedy.appendChild(topicCard);
                 break;
-            case 'course': sectCourse.appendChild(topicCard)
+            case 'course': sectCourse.appendChild(topicCard);
                 break;
         };
     });
 };
 
+/* Function to clear form when adding new article */
 const clearInput = () => {
     titleInput.value = '';
     tagInput.value = '';
-    categoryInput.forEach(option => {
-        if (option.disabled) { return }
-        else {
-            option.selected = false;
-        }
-    });
+    chooseSect = '';
     textInput.value = '';
     fileInput.value = '';
+    article = {};
 
-     = { };
-
-newArticle.classList.toggle('hidden');
+    sectionContainer.forEach(section => {
+        section.classList.toggle('hidden');
+    });
+    newArticle.classList.toggle('hidden');
 };
 
-/* removeSpecialChars function was copied from freeCodeCamp's Todo app*/
-const removeSpecialChars = str => str.replace(/[^a-zA-Z0-9. ]/g, "");
 
 /* submit event is handled by a function 
 which stores various inputs in an object that is stored locally.
@@ -77,36 +122,24 @@ and to clear the input fields respectively. */
 uploadBtn.addEventListener('click', e => {
     e.preventDefault();
 
-    let title = titleInput.value;
-    let id = `${removeSpecialChars(title).split(' ').join('-')}1${Date.now()}2`
-    let tag = tagInput.value;
-    let text = textInput.value;
-    let option = categoryInput.forEach(opt => {
-        if (opt.selected === true && opt.disabled != true) {
-            return opt.value;
-        }
-    });
-    let imageFile;
+    if (!titleInput.value && !textInput.value) {
+        alert('Please provide a title');
+    } else {
+        let title = titleInput.value;
+        let id = `${titleInput.value}1${Date.now()}2`
+        let tag = tagInput.value;
+        let text = textInput.value;
+        Array.from(categoryInput).forEach(opt => {
+            if (opt.selected == true) chooseSect = opt.value;
+        });
+        
+        article = { id, title, tag, chooseSect, text };
+        articleArr.push(article);
+        localStorage.setItem(`article`, JSON.stringify(articleArr));
 
-    fileInput.addEventListener('change', e => {
-        const image = e.target.files[0];
-        const reader = new FileReader();
+    }
 
-        reader.addEventListener('load', () => {
-            imageFile = reader.result;
-        })
-
-        if (image) {
-            reader.readAsDataURL(image);
-        }
-    });
-
-
-
-    article = { id, title, tag, option, imageFile, text };
-    localStorage.setItem("", JSON.stringify(article));
-
-    upload();
+    pushArticle();
     clearInput();
 
 });
@@ -119,14 +152,15 @@ const readArticle = (button) => {
     const selectElement = button.parentElement.id;
     const ObjIndex = contents.findIndex(content => content.id === selectElement);
 
-    const { id, title, tag, option, image, text } = contents[ObjIndex];
+    const { id, title, tag, chooseSect, text } = contents[ObjIndex];
+    document.querySelector('.write-btn').classList.toggle('hidden');
 
-    viewPage.innerHTML = ` <button id="back">Go Back</button>
+    viewPage.innerHTML += ` 
             <div class="view-card" id=${id}>
                 <div class="topic-head">
                     <h2 id="title">${(title).toUpperCase()}</h2>
                 </div>
-                <div class="view-image"><img src="${image}" alt="${option} image"></div>
+                <div class="view-image"><img src="img/Screenshot (261).png" alt="${chooseSect} image"></div>
                 <p class="tags">${tag}</p>
 
                 <div class="article-text">
@@ -135,19 +169,44 @@ const readArticle = (button) => {
 
             </div>`;
 
+    viewPage.classList.toggle('hidden');
+
     Array.from(sectionContainer).forEach(section => {
         section.classList.toggle('hidden');
     });
+
+    /* Adding event listener to back button when viewPage is shown*/
+    const backBtn = document.getElementById('back');
+    backBtn.addEventListener('click', () => {
+        pushArticle();
+        Array.from(sectionContainer).forEach(section => {
+            section.classList.toggle('hidden');
+        });
+        viewPage.innerHTML = '<button id="back">Go Back</button>'
+        viewPage.classList.toggle('hidden');
+        document.querySelector('.write-btn').classList.toggle('hidden');
+    })
 
 };
 
-document.getElementById('back').addEventListener('click', () => {
-
-    upload();
-    Array.from(sectionContainer).forEach(section => {
+/* Event listener to cancel adding new article operation */
+document.getElementById('cancel').addEventListener('click', () => {
+    pushArticle();
+    newArticle.classList.toggle('hidden');
+    sectionContainer.forEach(section => {
         section.classList.toggle('hidden');
     });
-
+    document.querySelector('.write-btn').classList.toggle('hidden');
 });
 
-upload();
+/* Function to display form and add hidden class to all sections */
+writeArticle.addEventListener('click', () => {
+    newArticle.classList.toggle('hidden');
+    sectionContainer.forEach(section => {
+        section.classList.toggle('hidden');
+    });
+    document.querySelector('.write-btn').classList.toggle('hidden');
+})
+
+
+pushArticle();
